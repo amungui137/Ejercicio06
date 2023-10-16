@@ -34,6 +34,12 @@ fun MyNavigation() {
         ) {backStackEntry ->
             Screen4(navigationController, backStackEntry.arguments?.getInt("age")?: 0)
         }
+        composable(
+            Routes.pantalla5.route,
+            arguments = listOf(navArgument("name") { defaultValue = "Manuel" })
+        ) {backStackEntry ->
+            Screen5(navigationController, backStackEntry.arguments?.getString("name"))
+        }
 
     }
 }
@@ -90,6 +96,21 @@ fun Screen4(navigationController: NavHostController, age: Int) {
     ) {
         Text(
             text = "Tengo $age años",
+            modifier = Modifier
+                .align(Alignment.Center)
+                .clickable { navigationController.navigate(Routes.pantalla5.route) })
+    }
+}
+
+@Composable
+fun Screen5(navigationController: NavHostController, name: String?) {
+    Box(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize(),
+    ) {
+        Text(
+            text = "Me llamo $name",
             modifier = Modifier
                 .align(Alignment.Center)
                 .clickable { navigationController.navigate(Routes.pantalla1.route) })
